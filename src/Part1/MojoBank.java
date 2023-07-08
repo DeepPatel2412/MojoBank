@@ -7,7 +7,7 @@ public class MojoBank                      // Creating a class that will run all
     {
         start();     // Call start() method.
     }
-    public static void start()          // Method that will become program's start/welcome page (suppose it as 1st page of program).
+    public static void start()          // Method to Run the Start Page.
     {
         // Displaying 4 Different Options to User.
         System.out.println();
@@ -266,6 +266,52 @@ public class MojoBank                      // Creating a class that will run all
         BankingFunctions(AccIndex);
     }
 
+    public static void AdminFunctions()
+    {
+
+        System.out.println();
+        System.out.println("--> Admin Options <--");
+        System.out.println("1) View Accounts Details ");
+        System.out.println("2) Delete Account ");
+        System.out.println("3) Log Out");
+        System.out.print("--> Enter A Number : ");
+
+        Scanner InputReader = new Scanner(System.in);
+        boolean ValidChoice= false;
+        while (!ValidChoice)
+        {
+            if (InputReader.hasNextInt())
+            {
+                int adminChoice = InputReader.nextInt();
+                if (adminChoice == 1)
+                {
+                    ViewAllAccounts();
+                    AdminFunctions();
+                    ValidChoice = true;
+                }
+                if (adminChoice == 2)
+                {
+                    DeleteUserAccount();
+                    AdminFunctions();
+                    ValidChoice = true;
+                }
+                if (adminChoice == 3)
+                {
+                    start();
+                    ValidChoice = true;
+                }
+                if (adminChoice == 0)
+                {
+                    AdminFunctions();
+                }
+            }
+            else
+            {
+                System.out.print("Enter 1-3 | 0 to Admin Menu : ");
+            }
+        }
+    }
+
     public static void Deposit(int AccIndex)
     {
         Scanner InputReader = new Scanner(System.in);
@@ -361,52 +407,6 @@ public class MojoBank                      // Creating a class that will run all
         }
     }
 
-    public static void AdminFunctions()
-    {
-
-        System.out.println();
-        System.out.println("--> Admin Options <--");
-        System.out.println("1) View Accounts Details ");
-        System.out.println("2) Delete Account ");
-        System.out.println("3) Log Out");
-        System.out.print("--> Enter A Number : ");
-
-        Scanner InputReader = new Scanner(System.in);
-        boolean ValidChoice= false;
-        while (!ValidChoice)
-        {
-            if (InputReader.hasNextInt())
-            {
-                int adminChoice = InputReader.nextInt();
-                if (adminChoice == 1)
-                {
-                    ViewAllAccounts();
-                    AdminFunctions();
-                    ValidChoice = true;
-                }
-                if (adminChoice == 2)
-                {
-                    delUserAcc();
-                    AdminFunctions();
-                    ValidChoice = true;
-                }
-                if (adminChoice == 3)
-                {
-                    start();
-                    ValidChoice = true;
-                }
-                if (adminChoice == 0)
-                {
-                    AdminFunctions();
-                }
-            }
-            else
-            {
-                System.out.print("Enter 1-3 | 0 to Admin Menu : ");
-            }
-        }
-    }
-
     public static void ViewAllAccounts()
     {
         int numOfAcc = AccountDetails.AccountName.size();
@@ -424,7 +424,7 @@ public class MojoBank                      // Creating a class that will run all
         }
     }   // End ViewAllAccounts() method.
 
-    public static void delUserAcc()
+    public static void DeleteUserAccount()
     {
         int numOfAcc = AccountDetails.AccountName.size();
         if (numOfAcc!=0)
@@ -434,10 +434,11 @@ public class MojoBank                      // Creating a class that will run all
             System.out.print("Enter Account Number(to be deleted) : ");
             while (!InputReader.hasNextInt())
             {
-                System.out.println("Oops Wrong Input! Try again : ");
+                System.out.println("Wrong Input! Try again : ");
                 InputReader.next();
                 InputReader.hasNextInt();
-            }   //End while loop
+            }
+            
             int ValidateAccountNumber = InputReader.nextInt();
             InputReader.nextLine();
             if (AccountDetails.AccountNumber.contains(ValidateAccountNumber))
@@ -445,7 +446,7 @@ public class MojoBank                      // Creating a class that will run all
                 AccIndex = AccountDetails.AccountNumber.indexOf(ValidateAccountNumber);
                 AccountDetails.ViewAccountDetails(AccIndex);
 
-                System.out.print("Verify if this is the account you want to delete[Y | N] : ");
+                System.out.print("Confirm Account Details [Y | N] : ");
                 String confirmDelete = InputReader.nextLine().toUpperCase();
 
                 while (!(confirmDelete.equals("Y") || confirmDelete.equals("N")))
@@ -457,7 +458,7 @@ public class MojoBank                      // Creating a class that will run all
                 if (confirmDelete.equals("Y"))
                 {
                     AccountDetails.DeleteAccount(AccIndex);
-                    System.out.println("** Account Deleted **");
+                    System.out.println("-- Account Deleted --");
                     AdminFunctions();
                 }
                 else  // Else execute following code.
@@ -468,7 +469,7 @@ public class MojoBank                      // Creating a class that will run all
             }
             else  // Else execute following code.
             {
-                System.out.println("There is no account associated with that number.");
+                System.out.println("--> Account Doesn't Exists.");
                 AdminFunctions();
             }
         }     // End if statement
@@ -476,7 +477,7 @@ public class MojoBank                      // Creating a class that will run all
         {
             System.out.println("No Account Exist in the system");
         }
-    }   // End delUserAcc() method.
+    }
 
-}   // End mainP2 class.
+}
 

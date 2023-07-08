@@ -4,70 +4,66 @@ import java.util.Random;
 
 public class AccountDetailsP2
 {
-    static CustomArraylistP2<Integer> accNum = new CustomArraylistP2<>();
-    static CustomArraylistP2<String> accHName = new CustomArraylistP2<>();
-    static CustomArraylistP2<String> accHAddress = new CustomArraylistP2<>();
-    static CustomArraylistP2<LocalDate> accODate = new CustomArraylistP2<>();
-    static CustomArraylistP2<Double> accCBalance = new CustomArraylistP2<>();
-    static CustomArraylistP2<InteractiveTransactionP2> InteractiveTransactionP2 = new CustomArraylistP2<>();
+    static CustomArraylistP2<String> AccountName = new CustomArraylistP2<>();
+    static CustomArraylistP2<String> HolderAddress = new CustomArraylistP2<>();
+    static CustomArraylistP2<Double> Balance = new CustomArraylistP2<>();
+    static CustomArraylistP2<Integer> AccountNumber = new CustomArraylistP2<>();
+    static CustomArraylistP2<LocalDate> OpeningDate = new CustomArraylistP2<>();
+    static CustomArraylistP2<InteractiveTransactionP2> TransactionDetails = new CustomArraylistP2<>();
 
     AccountDetailsP2(String Name, String Address)
     {
+        AccountName.add(Name);
+        HolderAddress.add(Address);
+        Balance.add(0.0);
+        OpeningDate.add(LocalDate.now());
+        TransactionDetails.add(new InteractiveTransactionP2());
+
         Random random = new Random();
         int NewAccNumber = random.nextInt(10000000,99999999);
-        while(accNum.contains(NewAccNumber))
+        while(AccountNumber.contains(NewAccNumber))
         {
             NewAccNumber = random.nextInt(10000000,99999999);
         }
-        accNum.add(NewAccNumber);
-        accHName.add(Name);
-        accHAddress.add(Address);
-        accODate.add(LocalDate.now());
-        accCBalance.add(0.0);
-        InteractiveTransactionP2.add(new InteractiveTransactionP2());
+        AccountNumber.add(NewAccNumber);
     }
-    public static void printGenDetails(int index)
+    public static void ViewAccountDetails(int AccIndex)
     {
         System.out.println();
         System.out.println("** Account General Details **");
-        System.out.printf("%-23s: %d\n","Account Number",accNum.get(index));
-        System.out.printf("%-23s: %s\n","Account Holder Name",accHName.get(index));
-        System.out.printf("%-23s: %s\n","Account Holder Address",accHAddress.get(index));
-        System.out.printf("%-23s: "+accODate.get(index)+"\n","Opening Date");
-        System.out.printf("%-23s: %.2f\n","Current Balance",accCBalance.get(index));
+        System.out.printf("%-23s: %d\n","Account Number",AccountNumber.get(AccIndex));
+        System.out.printf("%-23s: %s\n","Account Holder Name",AccountName.get(AccIndex));
+        System.out.printf("%-23s: %s\n","Account Holder Address",HolderAddress.get(AccIndex));
+        System.out.printf("%-23s: "+OpeningDate.get(AccIndex)+"\n","Opening Date");
+        System.out.printf("%-23s: %.2f\n","Current Balance",Balance.get(AccIndex));
     }
 
-    public static void deposit(int index, double amount)     // Method to deposit Money to user's Account.
+    public static void Deposit(int AccIndex, double Amount)     // Method to Deposit Money to user's Account.
     {
-        double balance = accCBalance.get(index);
-        double updateBalance = balance+amount;
-        accCBalance.set(index, updateBalance);
-        InteractiveTransactionP2.get(index).addTran("Deposit",amount);
+        Balance.set(AccIndex,Balance.get(AccIndex) + Amount);
+        TransactionDetails.get(AccIndex).UpdateTransaction("Deposit",Amount);
     }
 
-    public static void withdraw(int index, double amount)     // Method to withdraw Money from user's Account.
+    public static void withdraw(int AccIndex, double Amount)     // Method to withdraw Money from user's Account.
     {
-        double balance = accCBalance.get(index);
-        double updateBalance = balance-amount;
-        accCBalance.set(index, updateBalance);
-        InteractiveTransactionP2.get(index).addTran("Withdraw",amount);
+        Balance.set(AccIndex, Balance.get(AccIndex) - Amount);
+        TransactionDetails.get(AccIndex).UpdateTransaction("Withdraw",Amount);
     }
-    public static void printTranHistory(int index)      // Method to Print Account Transaction History at given index
+    public static void ViewRecentTransaction(int AccIndex)      // Method to Print Account Transaction History at given AccIndex
     {
 
         System.out.println();
-        InteractiveTransactionP2.get(index).SearchAndPrint();
+        TransactionDetails.get(AccIndex).SearchAndPrint();
     }
 
-    public static void removeAcc(int index)      // Method to remove/delete account from ArrayLists at given index.
+    public static void removeAcc(int AccIndex)      // Method to remove/delete account from ArrayLists at given AccIndex.
     {
-        // Removes account details from ArrayList.
-        AccountDetailsP2.accNum.remove(index);
-        AccountDetailsP2.accHName.remove(index);
-        AccountDetailsP2.accHAddress.remove(index);
-        AccountDetailsP2.accODate.remove(index);
-        AccountDetailsP2.accCBalance.remove(index);
-        InteractiveTransactionP2.remove(index);
+        AccountNumber.remove(AccIndex);
+        AccountName.remove(AccIndex);
+        HolderAddress.remove(AccIndex);
+        OpeningDate.remove(AccIndex);
+        Balance.remove(AccIndex);
+        TransactionDetails.remove(AccIndex);
     }
 
 }

@@ -31,7 +31,7 @@ public class MojoBankP2                      // Creating a class that will run a
                 if (startChoice == 1)               // if startChoice == 1 is true execute the given code.
                 {
                     createAcc();                                  // Call createAcc() method.
-                    userIndex = AccountDetailsP2.accHName.size()-1;        // Storing the last index of accHName ArrayList(New user) as userIndex (Assignment).
+                    userIndex = AccountDetailsP2.AccountName.size()-1;        // Storing the last index of AccountName ArrayList(New user) as userIndex (Assignment).
                     correctChoice = true;                         // Exiting/Breaking out of do while loop.
                 }
                 else if (startChoice == 2)      // else if startChoice == 2 is true execute the given code.
@@ -93,8 +93,8 @@ public class MojoBankP2                      // Creating a class that will run a
                     AccountDetailsP2 user = new AccountDetailsP2(name, address);    // Creating instance of Account class named user and passing the arguments required.
                     System.out.println();
                     System.out.println("** Congrats,Your account has been created **");  // Displaying congrats and account creation MSG.
-                    int userIndex = AccountDetailsP2.accCBalance.size() - 1;    // Storing the last index of accCBalance ArrayList(New user) as userIndex (Assignment).
-                    AccountDetailsP2.printGenDetails(userIndex);    // Printing details of new account at given index (userIndex) by using printGenDetails method from Account class.
+                    int userIndex = AccountDetailsP2.Balance.size() - 1;    // Storing the last index of Balance ArrayList(New user) as userIndex (Assignment).
+                    AccountDetailsP2.ViewAccountDetails(userIndex);    // Printing details of new account at given index (userIndex) by using ViewAccountDetails method from Account class.
 
                 }
                 else               // Else execute following code.
@@ -126,9 +126,9 @@ public class MojoBankP2                      // Creating a class that will run a
             input.hasNextInt();     // Prompting the user to try again.
         }
         int checkAccountNum = input.nextInt();                      // int checkAccountNum - Store the Account number given from user (Initialization).
-        if(AccountDetailsP2.accNum.contains(checkAccountNum))                // if accNum (Arraylist) contains checkAccountNum then execute the code.
+        if(AccountDetailsP2.AccountNumber.contains(checkAccountNum))                // if AccountNumber (Arraylist) contains checkAccountNum then execute the code.
         {
-            userIndex = AccountDetailsP2.accNum.indexOf(checkAccountNum);    // Store the index of ArrayList which contains the checkAccountNum (Assignment).
+            userIndex = AccountDetailsP2.AccountNumber.indexOf(checkAccountNum);    // Store the index of ArrayList which contains the checkAccountNum (Assignment).
             System.out.println("** Login Success **");              // Displaying Login Success Msg.
         }
         else                                                        // Else execute following code.
@@ -232,7 +232,7 @@ public class MojoBankP2                      // Creating a class that will run a
 
                 if (bankingChoice == 1)               // if bankingChoice == 1 is true execute the given code.
                 {
-                    deposit(userIndex);               // Call deposit() method.
+                    Deposit(userIndex);               // Call Deposit() method.
                     correctChoice = true;             // Exiting/Breaking out of while loop.
                 }
                 else if (bankingChoice == 2)          // else if bankingChoice == 2 is true execute the given code.
@@ -242,7 +242,7 @@ public class MojoBankP2                      // Creating a class that will run a
                 }
                 else if (bankingChoice == 3)          // else if bankingChoice == 3 is true execute the given code.
                 {
-                    AccountDetailsP2.printTranHistory(userIndex);      // Printing transaction history of the account at index (userIndex) by calling printTranDetails() method from Account class.
+                    AccountDetailsP2.ViewRecentTransaction(userIndex);      // Printing transaction history of the account at index (userIndex) by calling printTranDetails() method from Account class.
                     correctChoice = true;             // Exiting/Breaking out of while loop.
                 }
                 else if (bankingChoice == 4)          // else if bankingChoice == 4 is true execute the given code.
@@ -273,10 +273,10 @@ public class MojoBankP2                      // Creating a class that will run a
         bankingOptions(userIndex);                    // Call bankingOptions() method. ( Recursive call )
     }   // End bankingOptions() method
 
-    public static void deposit(int userIndex)         // Method that will deposit money into User's Account.
+    public static void Deposit(int userIndex)         // Method that will Deposit money into User's Account.
     {
         Scanner input = new Scanner(System.in);       // Scanner input - For taking input from user (Initialization).
-        System.out.print("Deposit Amount : ");         // Displaying enter deposit amount MSG.
+        System.out.print("Deposit Amount : ");         // Displaying enter Deposit amount MSG.
         boolean checkAmount = input.hasNextDouble();  // boolean checkAmount - Will be use for Checking if user has entered correct amount or not (Initialization).
         while(!checkAmount)                           // while not checkAmount is true loop continuously.
         {
@@ -284,7 +284,7 @@ public class MojoBankP2                      // Creating a class that will run a
             input.nextLine();                         // Clearing any unwanted text that Scanner may have.
             checkAmount = input.hasNextDouble();      // Prompting the user to try again (Assignment).
         }   // End while loop
-        double amount = input.nextDouble();           // double amount - Store the deposit amount given from user (Initialization).
+        double amount = input.nextDouble();           // double amount - Store the Deposit amount given from user (Initialization).
         while (amount<0)                             // loop until amount<0 is true.
         {
             System.out.print("Only enter value (> 0) || Menu [0] : ");  // Displaying Try Again Message.
@@ -301,18 +301,18 @@ public class MojoBankP2                      // Creating a class that will run a
         }
         else
         {
-            AccountDetailsP2.deposit(userIndex, amount);            // Depositing given amount to user's account by using deposit() method from Account class.
+            AccountDetailsP2.Deposit(userIndex, amount);            // Depositing given amount to user's account by using Deposit() method from Account class.
             System.out.println();
             System.out.printf("Deposited       :  %.2f \n", amount);      // Displaying deposited amount.
-            double cBalance = AccountDetailsP2.accCBalance.get(userIndex);      // double cBalance - Store Current Balance of User's Account.(Initialization)
+            double cBalance = AccountDetailsP2.Balance.get(userIndex);      // double cBalance - Store Current Balance of User's Account.(Initialization)
             System.out.printf("Current Balance :  %.2f \n",cBalance);       // Displaying current balance.
         }
-    }   // End deposit() method
+    }   // End Deposit() method
 
     public static void withdraw(int userIndex)        // Method that will withdraw money from User's Account.
     {
         Scanner input = new Scanner(System.in);       // Scanner input - For taking input from user (Initialization).
-        double cBalance = AccountDetailsP2.accCBalance.get(userIndex);      // double cBalance - Store Current Balance of User's Account.(Initialization)
+        double cBalance = AccountDetailsP2.Balance.get(userIndex);      // double cBalance - Store Current Balance of User's Account.(Initialization)
         if(cBalance == 0)                             // if cBalance == 0 is true execute the given code.
         {
             System.out.println("Sorry your account balance is 0 , you can't withdraw money right now.");   // Display you cant withdraw money MSG.
@@ -344,9 +344,9 @@ public class MojoBankP2                      // Creating a class that will run a
         AccountDetailsP2.withdraw(userIndex,depAmount);        // Withdrawing given amount from user's account by using withdraw() method from Account class.
         System.out.println();
         System.out.printf("Withdrawn       :  %.2f \n",depAmount);    // Displaying withdrawn amount.
-        cBalance = AccountDetailsP2.accCBalance.get(userIndex);              // Store updated current balance.
+        cBalance = AccountDetailsP2.Balance.get(userIndex);              // Store updated current balance.
         System.out.printf("Current Balance :  %.2f \n",cBalance);      // Displaying current balance.
-    }   // End deposit() method
+    }   // End Deposit() method
 
     public static void deleteAccount(int userIndex)   // Method that will delete User's Account from ArrayList.
     {
@@ -416,12 +416,12 @@ public class MojoBankP2                      // Creating a class that will run a
 
     public static void displayAllAcc()                // Method that will print general details of all accounts that exists in system.
     {
-        int numOfAcc = AccountDetailsP2.accHName.size();       // int numOfAcc - Store the number of accounts that exist in system/Arraylist (Initialization).
+        int numOfAcc = AccountDetailsP2.AccountName.size();       // int numOfAcc - Store the number of accounts that exist in system/Arraylist (Initialization).
         if (numOfAcc!=0)                              // if numOfAcc != 0 is true execute the given code.
         {
             for (int i = 0; i < numOfAcc; i++)        // for each account that exists in system execute
             {
-                AccountDetailsP2.printGenDetails(i);           // Print Account General Details by using printGenDetails() method from Account class.
+                AccountDetailsP2.ViewAccountDetails(i);           // Print Account General Details by using ViewAccountDetails() method from Account class.
                 System.out.println();
             }
         }
@@ -433,7 +433,7 @@ public class MojoBankP2                      // Creating a class that will run a
 
     public static void delUserAcc()                    // Method to Delete user Account on giving account number
     {
-        int numOfAcc = AccountDetailsP2.accHName.size();      // int numOfAcc - Store the number of accounts that exist in system/Arraylist (Initialization).
+        int numOfAcc = AccountDetailsP2.AccountName.size();      // int numOfAcc - Store the number of accounts that exist in system/Arraylist (Initialization).
         if (numOfAcc!=0)                               // if numOfAcc != 0 is true execute the given code.
         {
             int userIndex;                             // int userIndex Declared. (Declaration)
@@ -447,10 +447,10 @@ public class MojoBankP2                      // Creating a class that will run a
             }   //End while loop
             int checkAccountNum = input.nextInt();     // int checkAccountNum - Store the Account number given from user (Initialization).
             input.nextLine();                          // Clearing any unwanted text that Scanner may have.
-            if (AccountDetailsP2.accNum.contains(checkAccountNum))                // if accNum (Arraylist) contains checkAccountNum then execute the code.
+            if (AccountDetailsP2.AccountNumber.contains(checkAccountNum))                // if AccountNumber (Arraylist) contains checkAccountNum then execute the code.
             {
-                userIndex = AccountDetailsP2.accNum.indexOf(checkAccountNum);     // Store the index of ArrayList which contains the checkAccountNum (Assignment).
-                AccountDetailsP2.printGenDetails(userIndex);  // Print Account General Details by using printGenDetails() method from Account class.
+                userIndex = AccountDetailsP2.AccountNumber.indexOf(checkAccountNum);     // Store the index of ArrayList which contains the checkAccountNum (Assignment).
+                AccountDetailsP2.ViewAccountDetails(userIndex);  // Print Account General Details by using ViewAccountDetails() method from Account class.
 
                 System.out.print("Verify if this is the account you want to delete[Y | N] : ");   // Displaying confirm MSG.
                 String confirmDelete = input.nextLine().toUpperCase();     // String confirmDelete - Store user's Delete decision and convert it to upperCase (Initialization).

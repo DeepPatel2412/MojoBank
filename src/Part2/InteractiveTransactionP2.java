@@ -7,7 +7,7 @@ public class InteractiveTransactionP2        // Start InteractiveTransactionP2 C
     LocalDate[] tranDate = new LocalDate[6];  // LocalDate[] tranDate - Array to store transaction date.(Initialization)
     int index = 0;                // int index - Store index of user's account.(Initialization)
     int countTransaction =0;      // int countTransaction - Transaction Counter.(Initialization)
-    public void addTran(String type,double amount)     // Method to add Transactions.
+    public void UpdateTransaction(String type,double amount)     // Method to add Transactions.
     {
         tranType[index] = type;                  // Add transaction type to respective array.(Assignment)
         tranAmount[index] = amount;              // Add transaction amount to respective array.(Assignment)
@@ -17,7 +17,7 @@ public class InteractiveTransactionP2        // Start InteractiveTransactionP2 C
         {
             index=0;                             // Make index 0.(Reset index)
         }
-    }   //End addTran() method.
+    }   //End UpdateTransaction() method.
 
     //Creating sorting/searching algorithm without using java collection.
     public void SearchAndPrint()            // Method to Search and Print Transaction.
