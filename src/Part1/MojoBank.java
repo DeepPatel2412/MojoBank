@@ -138,7 +138,7 @@ public class MojoBank
     public static void AdminLogin()
     {
         String[] AdminUsername = {"HAMZA"};
-        String[] AdminPassword = {"HAMZA"};
+        String[] AdminPassword = {"HOKAGE"};
 
         Scanner InputReader = new Scanner(System.in);
 
