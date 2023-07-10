@@ -1,62 +1,60 @@
 package Part1;
-import java.util.Scanner;                // Importing Scanner
+import java.util.Scanner;
 
-public class MojoBank                      // Creating a class that will run all our program and its user(console) interface.
+public class MojoBank
 {
-    public static void main(String[] args)    // Main() method where program will start from.(Start Point)
+    public static void main(String[] args)
     {
-        start();     // Call start() method.
+        StartPage();
     }
-    public static void start()          // Method to Run the Start Page.
+    public static void StartPage()          // Method to Run the Start Page.
     {
-        // Displaying 4 Different Options to User.
         System.out.println();
         System.out.println("   --> Welcome to MojoBank! <--   ");
         System.out.println("1) Register        2) User Login");
         System.out.println("3) Admin Login     4) Exit");
         System.out.println();
-        System.out.print("--> Enter A Number : ");
+        System.out.print("Enter A Number : ");
 
         Scanner InputReader = new Scanner(System.in);
         boolean ValidChoice = false;
         int AccIndex = 0;
 
-        // Using do while loop to check and validate user's InputReader.
         do
         {
             if (InputReader.hasNextInt())
             {
-                int startChoice = InputReader.nextInt();
-                if (startChoice == 1)
+                int StartInputChoice = InputReader.nextInt();
+                if (StartInputChoice == 1)
                 {
                     RegisterAccount();
                     AccIndex = AccountDetails.AccountName.size()-1;
                     ValidChoice = true;
                 }
-                else if (startChoice == 2)
+                else if (StartInputChoice == 2)
                 {
                     AccIndex = UserLogin();
                     ValidChoice = true;
                 }
-                else if (startChoice == 3)
+                else if (StartInputChoice == 3)
                 {
                     AdminLogin();
                     AdminFunctions();
                     ValidChoice = true;
                 }
-                else if (startChoice == 4)
+                else if (StartInputChoice == 4)
                 {
-                    exit();
+                    Quit();
                 }
-                else if (startChoice == 0)
+                else if (StartInputChoice == 0)
                 {
-                    start();
+                    StartPage();
                 }
                 else
                 {
                     System.out.print("Enter 1-4 | 0 to Start Again : ");
                 }
-            }   // End if statement
+            }
             else
             {
                 System.out.print("Enter 1-4 | 0 to Start Again : ");
@@ -65,7 +63,7 @@ public class MojoBank                      // Creating a class that will run all
         } while (!ValidChoice);
 
         BankingFunctions(AccIndex);
-    }   // End start() method.
+    }
 
     public static void RegisterAccount()
     {
@@ -99,7 +97,7 @@ public class MojoBank                      // Creating a class that will run all
                 {
                     System.out.println("--> Age is not Valid ( Must be >=18 ) <--");
                     System.out.println("   ** Returning to Start Menu **  ");
-                    start();
+                    StartPage();
                 }
                 ValidateAge=true;
             }
@@ -109,7 +107,7 @@ public class MojoBank                      // Creating a class that will run all
                 InputReader.next();
             }
         }
-    }   // End RegisterAccount() method.
+    }
 
     public static int UserLogin()
     {
@@ -118,7 +116,7 @@ public class MojoBank                      // Creating a class that will run all
         System.out.print("Enter Account Number : ");
         while(!InputReader.hasNextInt())
         {
-            System.out.print("Enter Integers Only || Return Start [0] : ");
+            System.out.print("Enter Integers Only | Return Start [0] : ");
             InputReader.next();
             InputReader.hasNextInt();
         }
@@ -132,7 +130,7 @@ public class MojoBank                      // Creating a class that will run all
         {
             System.out.println("--> Login Failed , Account Not Found <--");
             System.out.println(" Returning to Start Menu");
-            start();
+            StartPage();
         }
         return AccIndex;
     }
@@ -165,15 +163,15 @@ public class MojoBank                      // Creating a class that will run all
                         login = true;
                     }
                 }
-            }   // End for loop
+            }
             if (!login)
             {
                 if(AttemptsLeft <= 0)
                 {
-                    start();
+                    StartPage();
                 }
                 System.out.println();
-                System.out.println("--> Login Failed,Try again");
+                System.out.println("--> Login Failed,Attempts Left :"+ AttemptsLeft);
                 System.out.print("Username : ");
                 ValidateUsername = InputReader.nextLine();
                 System.out.print("Password : ");
@@ -183,17 +181,17 @@ public class MojoBank                      // Creating a class that will run all
         }   // End while loop
     }   //End AdminLogin() method
 
-    public static void exit()
+    public static void Quit()
     {
         Scanner InputReader = new Scanner(System.in);
         System.out.print("Confirm Your Exit (Enter Y | N ) : ");
-        String confirmExit = InputReader.nextLine().toUpperCase();
-        while (!(confirmExit.equals("Y") || confirmExit.equals("N")))
+        String ConfirmExit = InputReader.nextLine().toUpperCase();
+        while (!(ConfirmExit.equals("Y") || ConfirmExit.equals("N")))
         {
-            System.out.print("Enter only Y | N : ");
-            confirmExit = InputReader.nextLine().toUpperCase();
+            System.out.print("Enter Only Y | N : ");
+            ConfirmExit = InputReader.nextLine().toUpperCase();
         }
-        if (confirmExit.equals("Y"))
+        if (ConfirmExit.equals("Y"))
         {
             System.out.println("--> Thank you for using choosing MojoBank <--");
             System.exit(0);
@@ -201,7 +199,7 @@ public class MojoBank                      // Creating a class that will run all
         else
         {
             System.out.println("--> Returning to Start Menu ");
-            start();
+            StartPage();
         }
     }
 
@@ -211,44 +209,44 @@ public class MojoBank                      // Creating a class that will run all
         System.out.println();
         System.out.println("      --> Banking Functions <--     ");
         System.out.println("1) Deposit               2) Withdraw");
-        System.out.println("2) Transaction Details   4) Delete Account");
+        System.out.println("3) Transaction Details   4) Delete Account");
         System.out.println("5) Log Out");
         System.out.println();
-        System.out.print("--> Enter A Number : ");
+        System.out.print("Enter A Number : ");
 
         boolean ValidChoice = false;
         while (!ValidChoice)
         {
             if(InputReader.hasNextInt())
             {
-                int bankingChoice = InputReader.nextInt();
+                int BankingInputChoice = InputReader.nextInt();
 
-                if (bankingChoice == 1)
+                if (BankingInputChoice == 1)
                 {
                     Deposit(AccIndex);
                     ValidChoice = true;
                 }
-                else if (bankingChoice == 2)
+                else if (BankingInputChoice == 2)
                 {
                     Withdraw(AccIndex);
                     ValidChoice = true;
                 }
-                else if (bankingChoice == 3)
+                else if (BankingInputChoice == 3)
                 {
                     AccountDetails.ViewRecentTransaction(AccIndex);
                     ValidChoice = true;
                 }
-                else if (bankingChoice == 4)
+                else if (BankingInputChoice == 4)
                 {
                     DeleteAccount(AccIndex);
                     ValidChoice = true;
                 }
-                else if (bankingChoice == 5)
+                else if (BankingInputChoice == 5)
                 {
-                    System.out.println("** Logged Out **");
-                    start();
+                    System.out.println("--> Logged Out <--");
+                    StartPage();
                 }
-                else if (bankingChoice == 0)
+                else if (BankingInputChoice == 0)
                 {
                     BankingFunctions(AccIndex);
                 }
@@ -268,13 +266,12 @@ public class MojoBank                      // Creating a class that will run all
 
     public static void AdminFunctions()
     {
-
         System.out.println();
         System.out.println("--> Admin Options <--");
-        System.out.println("1) View Accounts Details ");
-        System.out.println("2) Delete Account ");
+        System.out.println("1) View All Accounts");
+        System.out.println("2) Delete Account");
         System.out.println("3) Log Out");
-        System.out.print("--> Enter A Number : ");
+        System.out.print("Enter A Number : ");
 
         Scanner InputReader = new Scanner(System.in);
         boolean ValidChoice= false;
@@ -282,32 +279,32 @@ public class MojoBank                      // Creating a class that will run all
         {
             if (InputReader.hasNextInt())
             {
-                int adminChoice = InputReader.nextInt();
-                if (adminChoice == 1)
+                int AdminInputChoice = InputReader.nextInt();
+                if (AdminInputChoice == 1)
                 {
                     ViewAllAccounts();
                     AdminFunctions();
                     ValidChoice = true;
                 }
-                if (adminChoice == 2)
+                if (AdminInputChoice == 2)
                 {
                     DeleteUserAccount();
                     AdminFunctions();
                     ValidChoice = true;
                 }
-                if (adminChoice == 3)
+                if (AdminInputChoice == 3)
                 {
-                    start();
+                    StartPage();
                     ValidChoice = true;
                 }
-                if (adminChoice == 0)
+                if (AdminInputChoice == 0)
                 {
                     AdminFunctions();
                 }
             }
             else
             {
-                System.out.print("Enter 1-3 | 0 to Admin Menu : ");
+                System.out.print("Enter 1-3 | Admin Menu [0] : ");
             }
         }
     }
@@ -319,14 +316,14 @@ public class MojoBank                      // Creating a class that will run all
         boolean ValidateAmount = InputReader.hasNextDouble();
         while(!ValidateAmount)
         {
-            System.out.print("Enter Integer Only | 0 for Banking Menu : ");
+            System.out.print("Enter Integer Only | Banking Menu [0] : ");
             InputReader.nextLine();
             ValidateAmount = InputReader.hasNextDouble();
-        }   // End while loop
+        }
         double Amount = InputReader.nextDouble();
         while (Amount<0)
         {
-            System.out.print("Enter Integer Only | 0 for Banking Menu : ");
+            System.out.print("Enter Integer Only | Banking Menu [0] : ");
             InputReader.nextLine();
             if(InputReader.hasNextDouble())
             {
@@ -361,20 +358,20 @@ public class MojoBank                      // Creating a class that will run all
         boolean ValidateAmount = InputReader.hasNextDouble();
         while(!ValidateAmount)
         {
-            System.out.print("Enter Valid Amount (> 0) | 0 for Banking Menu : ");
+            System.out.print("Enter Valid Amount (> 0) | Banking Menu [0] : ");
             InputReader.nextLine();
             ValidateAmount = InputReader.hasNextDouble();
         }   // End while loop
         double DepositAmount = InputReader.nextDouble();
         while (DepositAmount > CurrentBalance || DepositAmount<0)
         {
-            System.out.print("Enter Valid Amount (> 0 & <= CurrentBalance) | 0 for Banking Menu : ");
+            System.out.print("Enter Valid Amount (> 0 & <= CurrentBalance) | Banking Menu [0] : : ");
             InputReader.nextLine();
             if(InputReader.hasNextDouble())
             {
                 DepositAmount = InputReader.nextDouble();
             }
-        }   // End while loop
+        }
         if (DepositAmount == 0)
         {
             BankingFunctions(AccIndex);
@@ -384,28 +381,6 @@ public class MojoBank                      // Creating a class that will run all
         System.out.printf("Withdrawn       : %.2f \n",DepositAmount);
         System.out.printf("Current Balance : %.2f \n",AccountDetails.Balance.get(AccIndex));
     }   // End Deposit() method
-
-    public static void DeleteAccount(int AccIndex)
-    {
-        Scanner InputReader = new Scanner (System.in);
-        System.out.print("Confirm Delete (Y | N) : ");
-        String confirmDelete = InputReader.nextLine().toUpperCase();
-        while (!(confirmDelete.equals("Y") || confirmDelete.equals("N")))
-        {
-            System.out.print("Enter only Y | N : ");
-            confirmDelete = InputReader.nextLine().toUpperCase();
-        }
-        if (confirmDelete.equals("Y"))
-        {
-            AccountDetails.DeleteAccount(AccIndex);
-            System.out.println("--> Account Deleted <--");
-            start();
-        }
-        else
-        {
-            BankingFunctions(AccIndex);
-        }
-    }
 
     public static void ViewAllAccounts()
     {
@@ -424,6 +399,28 @@ public class MojoBank                      // Creating a class that will run all
         }
     }   // End ViewAllAccounts() method.
 
+    public static void DeleteAccount(int AccIndex)
+    {
+        Scanner InputReader = new Scanner (System.in);
+        System.out.print("Confirm Delete (Y | N) : ");
+        String confirmDelete = InputReader.nextLine().toUpperCase();
+        while (!(confirmDelete.equals("Y") || confirmDelete.equals("N")))
+        {
+            System.out.print("Enter only Y | N : ");
+            confirmDelete = InputReader.nextLine().toUpperCase();
+        }
+        if (confirmDelete.equals("Y"))
+        {
+            AccountDetails.DeleteAccount(AccIndex);
+            System.out.println("--> Account Deleted <--");
+            StartPage();
+        }
+        else
+        {
+            BankingFunctions(AccIndex);
+        }
+    }
+
     public static void DeleteUserAccount()
     {
         int numOfAcc = AccountDetails.AccountName.size();
@@ -434,7 +431,7 @@ public class MojoBank                      // Creating a class that will run all
             System.out.print("Enter Account Number(to be deleted) : ");
             while (!InputReader.hasNextInt())
             {
-                System.out.println("Wrong Input! Try again : ");
+                System.out.println("Enter Integer Only : ");
                 InputReader.next();
                 InputReader.hasNextInt();
             }
@@ -453,7 +450,7 @@ public class MojoBank                      // Creating a class that will run all
                 {
                     System.out.print("Enter only Y or N : ");
                     confirmDelete = InputReader.nextLine().toUpperCase();
-                }   //End while loop
+                }
 
                 if (confirmDelete.equals("Y"))
                 {
@@ -467,13 +464,13 @@ public class MojoBank                      // Creating a class that will run all
                     AdminFunctions();
                 }
             }
-            else  // Else execute following code.
+            else
             {
                 System.out.println("--> Account Doesn't Exists.");
                 AdminFunctions();
             }
-        }     // End if statement
-        else  // Else execute following code.
+        }
+        else
         {
             System.out.println("No Account Exist in the system");
         }

@@ -60,7 +60,6 @@ public class InteractiveTransaction
         {
             System.out.println("-- No Transactions Available --");
         }
-
     }
 
 }

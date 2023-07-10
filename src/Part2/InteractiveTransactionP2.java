@@ -58,7 +58,6 @@ public class InteractiveTransactionP2
         {
             System.out.println("-- No Transactions Available --");
         }
-
     }
 
 }
