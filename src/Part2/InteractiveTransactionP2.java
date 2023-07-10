@@ -1,66 +1,64 @@
 package Part2;
-import java.time.LocalDate;      // Import LocalDate
+import java.time.LocalDate;     // Import LocalDate.
 public class InteractiveTransactionP2        // Start InteractiveTransactionP2 Class.
 {
-    String[] tranType = new String[6];        // String[] tranType - Array to Store transaction type.(Initialization)
-    double[]tranAmount = new double[6];       // double[] tranAmount - Array to store transaction amount.(Initialization)
-    LocalDate[] tranDate = new LocalDate[6];  // LocalDate[] tranDate - Array to store transaction date.(Initialization)
-    int index = 0;                // int index - Store index of user's account.(Initialization)
-    int countTransaction =0;      // int countTransaction - Transaction Counter.(Initialization)
-    public void UpdateTransaction(String type,double amount)     // Method to add Transactions.
+    String[] TransactionType = new String[6];
+    double[]TransactionAmount = new double[6];
+    LocalDate[] TransactionDate = new LocalDate[6];
+    int index = 0;
+    int TransactionCounter = 0;
+    public void UpdateTransaction(String Type,double Amount)     // Method to add Transactions.
     {
-        tranType[index] = type;                  // Add transaction type to respective array.(Assignment)
-        tranAmount[index] = amount;              // Add transaction amount to respective array.(Assignment)
-        tranDate[index] = LocalDate.now();       // Add transaction date to respective array.(Assignment)
-        index++;                                 // Increment by 1.(Operation)
-        if (index>5)                             // if index>5 execute the given code.
+        TransactionType[index] = Type;
+        TransactionAmount[index] = Amount;
+        TransactionDate[index] = LocalDate.now();
+        index++;
+        if (index>5)
         {
-            index=0;                             // Make index 0.(Reset index)
+            index=0;
         }
-    }   //End UpdateTransaction() method.
+    }
 
-    //Creating sorting/searching algorithm without using java collection.
-    public void SearchAndPrint()            // Method to Search and Print Transaction.
+    public void SearchAndPrint()      // Method to Search and Print Transaction.
     {
-        double[] copiedArray = tranAmount.clone();                         // Clone tranAmount Array.
-        boolean printLayout = false;
+        double[] CloneArray = TransactionAmount.clone();
+        boolean PrintUI = false;
 
-        for (int i =0;i<6;i++)            // for loop to iterate it 6 times.
+        for (int i =0;i<6;i++)
         {
-            double max = copiedArray[0];                     // Set max initial value to copiedArray[0].
-            int indexSorted = 0;                             // int indexSorted - Store index of sorted elements.
+            double MaxAmount = CloneArray[0];
+            int SortedIndex = 0;
 
-            for (int j = 0; j < copiedArray.length ; j++)    // for loop to iterate it 6 times.
+            for (int j= 0; j< CloneArray.length ; j++)
             {
-                if ( max < copiedArray[j] )                  // if max<copiedArray[j] execute given code.
+                if ( MaxAmount < CloneArray[j] )
                 {
-                    max= copiedArray[j];                     // Set max to copiedArray[j].
-                    indexSorted = j;                         // Set indexSorted to j.
+                    MaxAmount= CloneArray[j];
+                    SortedIndex = j;
                 }
             }
-            if (copiedArray[indexSorted] != 0)      // if tranAmount[indexSorted] != 0 it will execute block
+            if (CloneArray[SortedIndex] != 0)      // if TransactionAmount[SortedIndex] != 0 it will execute block
             {
-                // Display Transaction History.
-                if (!printLayout)
+                if (!PrintUI)
                 {
-                    System.out.println("** Transaction History ** ");
+                    System.out.println("--> Transaction Details <-- ");
                     System.out.println();
                     System.out.printf("%-15s%-15s%-13s\n","Type","Amount","Date");
                     System.out.println("----------------------------------------");
-                    printLayout = true;
+                    PrintUI = true;
                 }
-                System.out.printf("%-15s%-15.2f"+tranDate[indexSorted]+"\n",
-                        tranType[indexSorted],tranAmount[indexSorted]/*,tranDate[indexSorted]*/);
-                countTransaction++;     // Increment by 1.
+                System.out.printf("%-15s%-15.2f"+TransactionDate[SortedIndex]+"\n",
+                        TransactionType[SortedIndex],TransactionAmount[SortedIndex]);
+                TransactionCounter++;
             }
-            copiedArray[indexSorted] = 0;     // Set copiedArray[indexSorted] to 0 So it won't be repeated.
-        }    // End for loop
-        if(countTransaction == 0)             // if no transaction execute given code.
+            CloneArray[SortedIndex] = 0;
+        }
+        if(TransactionCounter == 0)
         {
-            System.out.println("** No recent Transactions :) **");      // Display no transaction MSG.
+            System.out.println("-- No Transactions Available --");
         }
 
-    }   // End SearchAndPrint() method.
+    }
 
-}   // End TranDetailsP2 class.
+}
 

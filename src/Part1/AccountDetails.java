@@ -42,12 +42,6 @@ public class AccountDetails
         TransactionDetails.get(AccIndex).UpdateTransaction("Withdraw",Amount);
     }
 
-    public static void ViewRecentTransaction(int AccIndex)      // Method to Print Account Transaction History at given AccIndex.
-    {
-        System.out.println();
-        TransactionDetails.get(AccIndex).SortNPrint();
-    }
-
     public static void ViewAccountDetails(int AccIndex)     // Method to Print Account General Details at given AccIndex
     {
         System.out.println();
@@ -59,7 +53,13 @@ public class AccountDetails
         System.out.printf("%-23s: %.2f\n","Current Balance",Balance.get(AccIndex));
     }
 
-    public static void DeleteAccount(int AccIndex)
+    public static void ViewRecentTransaction(int AccIndex)      // Method to Print Account Transaction History at given AccIndex.
+    {
+        System.out.println();
+        TransactionDetails.get(AccIndex).SortNPrint();
+    }
+
+    public static void DeleteAccount(int AccIndex)     // Method to remove/delete account from ArrayLists at given AccIndex.
     {
         AccountNumber.remove(AccIndex);
         AccountName.remove(AccIndex);

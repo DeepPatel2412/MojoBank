@@ -8,7 +8,8 @@ public class InteractiveTransaction
     double[]TransactionAmount = new double[6];
     LocalDate[] TransactionDate = new LocalDate[6];
     int index = 0;
-    public void UpdateTransaction(String Type,double Amount)      // Method to add Transactions.
+    int TransactionCounter = 0;
+    public void UpdateTransaction(String Type,double Amount)     // Method to add Transactions.
     {
         TransactionType[index] = Type;
         TransactionAmount[index] = Amount;
@@ -23,7 +24,6 @@ public class InteractiveTransaction
     public void SortNPrint()      // Method to Sort and Print Transaction.
     {
         int SortedIndex;
-        int TransactionCounter = 0;
         double[] CloneArray = TransactionAmount.clone();
         boolean PrintUI = false;
 
@@ -31,10 +31,10 @@ public class InteractiveTransaction
 
         for (int i=CloneArray.length-1;i>=0;i--)
         {
-            double tAmount = CloneArray[i];
+            double TranAmount = CloneArray[i];
             for (int j= 0 ; j<TransactionAmount.length ; j++)
             {
-                if (TransactionAmount[j] == tAmount)
+                if (TransactionAmount[j] == TranAmount)
                 {
                     SortedIndex = j;
                     if (TransactionAmount[SortedIndex] != 0)
@@ -50,7 +50,7 @@ public class InteractiveTransaction
                         System.out.printf("%-15s%-15.2f"+TransactionDate[SortedIndex]+"\n",
                                 TransactionType[SortedIndex],TransactionAmount[SortedIndex]);
                         TransactionCounter++;
-                        tAmount =0;
+                        TranAmount =0;
                     }
                 }
             }

@@ -27,7 +27,20 @@ public class AccountDetailsP2
         }
         AccountNumber.add(NewAccNumber);
     }
-    public static void ViewAccountDetails(int AccIndex)
+
+    public static void Deposit(int AccIndex, double Amount)     // Method to Deposit Money to user's Account.
+    {
+        Balance.set(AccIndex,Balance.get(AccIndex) + Amount);
+        TransactionDetails.get(AccIndex).UpdateTransaction("Deposit",Amount);
+    }
+
+    public static void Withdraw(int AccIndex, double Amount)     // Method to Withdraw Money from user's Account.
+    {
+        Balance.set(AccIndex, Balance.get(AccIndex) - Amount);
+        TransactionDetails.get(AccIndex).UpdateTransaction("Withdraw",Amount);
+    }
+
+    public static void ViewAccountDetails(int AccIndex)     // Method to Print Account General Details at given AccIndex
     {
         System.out.println();
         System.out.println("** Account General Details **");
@@ -38,25 +51,13 @@ public class AccountDetailsP2
         System.out.printf("%-23s: %.2f\n","Current Balance",Balance.get(AccIndex));
     }
 
-    public static void Deposit(int AccIndex, double Amount)     // Method to Deposit Money to user's Account.
+    public static void ViewRecentTransaction(int AccIndex)      // Method to Print Account Transaction History at given AccIndex.
     {
-        Balance.set(AccIndex,Balance.get(AccIndex) + Amount);
-        TransactionDetails.get(AccIndex).UpdateTransaction("Deposit",Amount);
-    }
-
-    public static void withdraw(int AccIndex, double Amount)     // Method to withdraw Money from user's Account.
-    {
-        Balance.set(AccIndex, Balance.get(AccIndex) - Amount);
-        TransactionDetails.get(AccIndex).UpdateTransaction("Withdraw",Amount);
-    }
-    public static void ViewRecentTransaction(int AccIndex)      // Method to Print Account Transaction History at given AccIndex
-    {
-
         System.out.println();
         TransactionDetails.get(AccIndex).SearchAndPrint();
     }
 
-    public static void removeAcc(int AccIndex)      // Method to remove/delete account from ArrayLists at given AccIndex.
+    public static void DeleteAccount(int AccIndex)     // Method to remove/delete account from ArrayLists at given AccIndex.
     {
         AccountNumber.remove(AccIndex);
         AccountName.remove(AccIndex);
