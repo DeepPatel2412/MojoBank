@@ -1,6 +1,7 @@
 package Part2;
 import java.time.LocalDate;     // Import LocalDate.
-public class InteractiveTransactionP2        // Start InteractiveTransactionP2 Class.
+
+public class InteractiveTransactionP2
 {
     String[] TransactionType = new String[6];
     double[]TransactionAmount = new double[6];
@@ -37,7 +38,7 @@ public class InteractiveTransactionP2        // Start InteractiveTransactionP2 C
                     SortedIndex = j;
                 }
             }
-            if (CloneArray[SortedIndex] != 0)      // if TransactionAmount[SortedIndex] != 0 it will execute block
+            if (CloneArray[SortedIndex] != 0)
             {
                 if (!PrintUI)
                 {
